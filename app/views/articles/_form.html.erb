@@ -1,0 +1,45 @@
+<%= form_with(model: article) do |form| %>
+
+  <% if article.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
+      <ul>
+        <% article.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>}
+      </ul>
+    </div>
+  <% end %>
+
+
+
+  <div class="field text-bold">
+    <%= form.label :title, "Titulo" %>
+  </div>
+  <div>
+    <%= form.text_field :title,class:"form-control" %>
+  </div>
+    <%= form.label :category_elements, "Categorías"%>
+    <div class="row">
+      <% @categories.each do |category| %>
+      <label class="col-sm-auto col-md-auto offset-md-auto col-lg-auto offset-lg-auto">
+      <input class="form-check-input"<%= form.check_box :category_elements, {multiple: true}, category.id, nil %>
+        <%= category.title %>
+      <% end %>
+      ></label>
+    </div>
+
+
+
+
+
+  <div class="field">
+    <%= form.label :content,"Contenido" %>
+    <%= form.rich_text_area :content,class:"form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Publicar', class: "btn btn-primary" %>
+  </div>
+<% end %>
+

@@ -1,0 +1,95 @@
+
+<div class="books-page">
+  <div class="container">
+
+
+
+<%= form_tag books_path, method: :get do %>
+    <div class="row">
+      <div class="form-group col-4 col-md-4">
+        <%= text_field_tag :title, params[:title], class: "form-control", placeholder: "¿qué estás buscando?" %>
+      </div>
+      <div class="form-group col-6 col-md-4">
+          <%= submit_tag "Buscar", name: nil, class: "btn btn-primary btn-md" %>
+      </div>
+    <div class="text-right"><%= link_to "Agregar Libro", new_book_path, class: "btn btn-success rounded-3" %></div>
+    <% end %>  
+    </div>
+
+
+    <section>
+      <% if flash[:notice] %>
+        <p class="alert alert-info"> <%= notice %> </p>
+      <% end %>
+      <% if flash[:alert] %>
+        <p class="alert alert-danger"> <%= alert  %> </p>
+      <% end %>
+      <%= yield %>
+    </section>
+
+  <div class="container">
+  <div class="row row-cols-1">
+
+
+
+    <% @books.each do |book| %>
+
+
+
+      <div class="book card flex-sm-row align-items-center align-items-sm-start mt-1">
+        <img src="<%= book.image_url %>" alt="<%= book.title %>" class="border border-dark">
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= book.title %>
+            <small><%= book.author %></small>
+          </h5>
+          <p class="card-text"><%= book.description %></p>
+
+          <%= link_to "Detalles", book, class: "btn btn-primary btn-sm" %>
+
+          <% if signed_in? %>
+
+            <%= link_to "  Editar  ", edit_book_path(book), class: "btn btn-info btn-sm" %>
+
+            <%= link_to "Eliminar", book, class: "btn btn-danger btn-sm", method: :delete, data: { confirm: "¿Estás seguro de eliminar este libro?" } %>
+
+            
+
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+</div>
+</div>
+
+    <%#= will_paginate @books,renderer: BootstrapPagination::Rails %>
+
+    <div class="pagination" style="font-size: small">
+      <%#= will_paginate @books,
+      :inner_window => 1,
+      :outer_window => 1,
+:separator      => "&laquo ",
+      :previous_label => '  Anterior -  ',
+      :next_label => ' - Página siguiente EEE  '
+      %>
+<%= 
+will_paginate @books,
+  :class          => 'pagination',
+  :previous_label => ' &laquo; Anterior ',
+  :next_label     => ' Siguiente &raquo; ',
+  :inner_window   => 4, # links around the current page
+  :outer_window   => 1, # links around beginning and end
+  :separator      => ' - ', # single space is friendly to spiders and non-graphic browsers
+  :param_name     => :page,
+  :params         => nil,
+  
+  :page_links     => true,
+  :container      => true
+
+%>
+    </div>
+
+  </div>
+</div>
+

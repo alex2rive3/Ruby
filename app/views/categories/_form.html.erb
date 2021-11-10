@@ -1,0 +1,35 @@
+<%= form_with(model: category) do |form| %>
+  <% if category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul>
+        <% category.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+		<%= form.label :category_elements, "Categorías id"%>
+		<div class="row">
+			<% @categories.each do |category| %>
+			<label class="col-6 col-sm-4">
+				<%= form.check_box :category_elements, {multiple: true}, category.id, nil %>
+				<%= category.title %>
+			<% end %>
+			</label>
+		</div>
+	</div>
+
+  <div class="field">
+    <%= form.label :color %>
+    <%= form.color_field :color %>
+    <%#= form.text_field :color %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
