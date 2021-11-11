@@ -3,4 +3,5 @@ class Photo < ApplicationRecord
     enum license: [:copyright, :copyleft, :creative_comons]
     enum visibility:[:pub, :priv]
     has_many :comment_photos
+    has_many :commentis, as: :commentable
 end

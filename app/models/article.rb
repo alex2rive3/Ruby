@@ -1,6 +1,7 @@
 class Article < ApplicationRecord
     belongs_to :user
     has_rich_text :content
+	has_many :commentis, as: :commentable
     has_many :comments
     has_many :has_categories
     has_many :categories, through: :has_categories #(through significa a través de.)

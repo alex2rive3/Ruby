@@ -1,0 +1,30 @@
+<% if signed_in? %>
+  <div class="card bg-light new-comment">
+    <div class="card-body">
+      <p class="font-weight-bold">Deja tu comentario:</p>
+      <%#= form_for @book.comment_books.build do |f| %>
+        <%#= f.hidden_field :book_id, value: @book.id %>
+        <%= form_for [commenti] do |f| %>
+		  <%= f.hidden_field :commentable_id %>
+		  <%= f.hidden_field :commentable_type %>
+	      <%= f.label :username %>
+		  <%= f.text_field :username, class: "form-control" %>
+		   <%= f.label :message %>
+		  <%#= f.text_area :message %>    
+        <div class="form-group">
+          <%= f.text_area :message, rows: 4, class: "form-control" %>
+        </div>
+
+        <div class="text-right">
+          <%= f.submit "Comentar", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <div class="card bg-light mt-5">
+    <div class="card-body">
+      <p class="card-text text-center lead"><%= link_to "Regístrate", new_user_registration_path %> o <%= link_to "Ingresa", new_user_session_path %> para comentar</p>
+    </div>
+  </div>
+<% end %>

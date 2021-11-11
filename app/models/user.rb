@@ -5,8 +5,9 @@ class User < ApplicationRecord
   has_many :photos
   has_many :comment_photos
   has_many :comment_books
+  has_many :commentis
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :timeoutable
 end

@@ -18,3 +18,13 @@
     <%= link_to 'Borrar', photo_path, method: :delete, data: {confirm: '¿Estás seguro?'} %>
 <% end %>
 <%= render "comment_photos" %>
+
+<div class="card comments mt-5 mb-5">
+  <div class="card-header border-bottom-0 font-weight-bold bg-transparent">Comentarios</div>
+  <ul class="list-group list-group-flush">
+    <% if @article.commentis.empty? %>
+      <li class="list-group-item text-center">Aún no hay comentarios para este artículo :(</li>
+    <% end %>
+  </ul>
+</div>
+<%= render 'commentis/widget', commentable: @photo%>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :commentis, only: [:create]
+  resources :proyectos
   resources :categories
   resources :comment_photos
   resources :comment_books
